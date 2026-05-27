@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Prose from '@/components/content/Prose.astro';
+import LangBadge from '@/components/content/LangBadge.astro';
+import { t, localizedHref, formatDate } from '@/i18n/utils';
+
+export const getStaticPaths = (async () => {
+  const novas = await getCollection('novas');
+  return novas.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// A interface do detalle vai no idioma do contido.
+const lang = entry.data.lang;
+const { title, summary, date, tags, cover } = entry.data;
+---
+
+<BaseLayout
+  lang={lang}
+  title={title}
+  description={summary}
+  ogType="article"
+  ogImage={`/og/novas-${entry.id}.png`}
+>
+  <article class="mx-auto max-w-[720px] px-4 py-12 sm:py-16">
+    <a
+      href={localizedHref('news', lang)}
+      class="inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary-dark"
+    >
+      <span aria-hidden="true">&larr;</span>
+      {t(lang, 'content.backToNews')}
+    </a>
+
+    <header class="mt-6">
+      <div class="flex flex-wrap items-center gap-2 text-xs text-muted">
+        <LangBadge lang={lang} uiLang={lang} />
+        <time datetime={date.toISOString()} class="tabular-nums">{formatDate(date, lang)}</time>
+      </div>
+      <h1 class="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[1.1] text-primary-dark">
+        {title}
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-muted">{summary}</p>
+    </header>
+
+    {
+      cover && (
+        <img
+          src={cover}
+          alt=""
+          class="mt-8 w-full rounded-card border border-border"
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }
+
+    <Prose class="mt-8">
+      <Content />
+    </Prose>
+
+    {
+      tags.length > 0 && (
+        <ul class="mt-10 flex flex-wrap gap-1.5 border-t border-border pt-6">
+          <li class="sr-only">{t(lang, 'content.tags')}</li>
+          {tags.map((tag) => (
+            <li class="rounded-chip bg-bg px-2 py-0.5 text-xs font-medium text-muted ring-1 ring-border">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </article>
+</BaseLayout>

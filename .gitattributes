@@ -1,0 +1,13 @@
+# Normaliza finais de liña a LF no repo (edición web Keystatic + build Linux en Vercel).
+* text=auto eol=lf
+
+# Binarios: sen conversión de finais de liña.
+*.pdf -text
+*.ttf -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.webp -text
+*.ico -text
+*.woff -text
+*.woff2 -text

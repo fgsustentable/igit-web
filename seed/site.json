@@ -1,0 +1,21 @@
+{
+  "_comment": "Semente para src/data/site.json (singleton editable en Keystatic). Decisión do cliente: contacto institucional info@igit.gal; sen teléfono nin enderezo públicos.",
+  "claim": {
+    "gl": "Intelixencia territorial para Galicia",
+    "es": "Inteligencia territorial para Galicia"
+  },
+  "heroTitle": {
+    "gl": "Instituto Galego de Intelixencia Territorial",
+    "es": "Instituto Gallego de Inteligencia Territorial"
+  },
+  "heroSubtitle": {
+    "gl": "Aplicamos cartografía, SIG, teledetección, análise de datos e intelixencia artificial ao coñecemento, planificación e xestión do territorio.",
+    "es": "Aplicamos cartografía, SIG, teledetección, análisis de datos e inteligencia artificial al conocimiento, planificación y gestión del territorio."
+  },
+  "contactEmail": "info@igit.gal",
+  "social": {
+    "linkedin": "",
+    "x": "",
+    "bluesky": ""
+  }
+}

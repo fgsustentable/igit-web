@@ -1,0 +1,40 @@
+---
+/**
+ * Motivo de marca: liñas de contorno topográfico en SVG.
+ * Puramente decorativo (aria-hidden). Úsase no hero e como divisoria sutil.
+ */
+interface Props {
+  class?: string;
+  /** Opacidade das liñas (0–1). */
+  opacity?: number;
+}
+const { class: className = '', opacity = 0.12 } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 1200 400"
+  preserveAspectRatio="xMidYMid slice"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  style={`--topo-opacity:${opacity}`}
+>
+  <g
+    stroke="currentColor"
+    stroke-width="1.25"
+    stroke-linecap="round"
+    style="opacity:var(--topo-opacity)"
+  >
+    <path d="M-20 120C160 70 300 180 480 150 660 120 760 30 980 60 1120 80 1180 60 1240 50" />
+    <path d="M-20 170C150 130 320 230 500 200 680 170 800 90 1000 120 1140 140 1200 120 1240 110" />
+    <path d="M-20 220C160 190 330 280 520 250 700 222 840 150 1020 180 1150 200 1210 185 1240 178" />
+    <path d="M-20 275C170 250 350 330 540 305 720 282 880 215 1050 245 1170 265 1215 252 1240 246" />
+    <path d="M-20 330C180 312 370 380 560 360 740 342 910 285 1080 312 1185 328 1218 320 1240 316" />
+  </g>
+  <g fill="currentColor" style="opacity:calc(var(--topo-opacity) * 1.8)">
+    <circle cx="480" cy="150" r="3.5" />
+    <circle cx="1000" cy="120" r="3" />
+    <circle cx="540" cy="305" r="2.5" />
+  </g>
+</svg>

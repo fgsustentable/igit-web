@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import Search from '@/components/search/Search.tsx';
+import { t } from '@/i18n/utils';
+
+const lang = 'es' as const;
+
+const translations = {
+  placeholder: t(lang, 'search.placeholder'),
+  clear_search: t(lang, 'search.clear'),
+  zero_results: t(lang, 'search.zeroResults'),
+};
+---
+
+<BaseLayout lang={lang} title={t(lang, 'search.title')} description={t(lang, 'search.intro')}>
+  <PageHeader title={t(lang, 'search.title')} intro={t(lang, 'search.intro')} />
+
+  <section class="mx-auto max-w-[760px] px-4 py-12 sm:px-6 sm:py-16">
+    <Search client:only="react" translations={translations} />
+    <noscript>
+      <p class="rounded-card border border-dashed border-border bg-surface px-5 py-8 text-center text-sm text-muted">
+        {t(lang, 'search.intro')}
+      </p>
+    </noscript>
+  </section>
+</BaseLayout>

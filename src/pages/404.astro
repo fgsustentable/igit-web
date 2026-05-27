@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/content/Icon.astro';
+import { t, localizedHref } from '@/i18n/utils';
+
+// Páxina estática única: vai no idioma por defecto (galego).
+const lang = 'gl' as const;
+---
+
+<BaseLayout lang={lang} title={t(lang, 'notFound.title')} noindex={true}>
+  <section class="mx-auto flex max-w-[640px] flex-col items-center px-4 py-20 text-center sm:py-28">
+    <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+      <Icon name="map" size={28} />
+    </span>
+    <p class="mt-6 font-display text-5xl font-bold text-primary-dark">404</p>
+    <h1 class="mt-3 text-2xl font-bold text-primary-dark sm:text-3xl">{t(lang, 'notFound.title')}</h1>
+    <p class="mt-4 text-lg leading-relaxed text-muted">{t(lang, 'notFound.text')}</p>
+    <a
+      href={localizedHref('home', lang)}
+      class="mt-8 inline-flex items-center justify-center rounded-btn bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary-dark"
+    >
+      {t(lang, 'notFound.back')}
+    </a>
+  </section>
+</BaseLayout>

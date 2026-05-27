@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Tokens de deseño de IGIT (Sección 7 do blueprint).
+ * Identidade propia: petróleo + verde territorio + ámbar.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Cores */
+  --color-primary: #0E4F5C;
+  --color-primary-dark: #0A3A44;
+  --color-secondary: #2E7D5B;
+  --color-accent: #E0A458;
+  --color-bg: #FBFAF7;
+  --color-surface: #FFFFFF;
+  --color-text: #16242A;
+  --color-muted: #5C6B70;
+  --color-border: #E4E2DC;
+  --color-success: #2E7D5B;
+  --color-destructive: #C0492F;
+
+  /* Tipografía */
+  --font-display: "Space Grotesk Variable", system-ui, sans-serif;
+  --font-body: "Inter Variable", system-ui, sans-serif;
+
+  /* Radios */
+  --radius-chip: 4px;
+  --radius-btn: 8px;
+  --radius-card: 12px;
+
+  /* Ancho máximo de contido */
+  --spacing-content: 1200px;
+  --spacing-prose: 720px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Estilos base
+ * ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-primary-dark);
+  }
+
+  /* Foco accesible e visible en todo o sitio (WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Selección coherente coa marca */
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: var(--color-text);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Tipografía de artigo (.prose) — corpo de novas/publicacións/proxectos
+ * renderizado dende Markdoc. Sen plugin externo: capa gratuíta = 0 deps.
+ * ------------------------------------------------------------------ */
+@layer components {
+  .prose {
+    color: var(--color-text);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose > * + * {
+    margin-top: 1.15em;
+  }
+  .prose h2 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-top: 1.9em;
+    margin-bottom: 0.6em;
+  }
+  .prose h3 {
+    font-size: 1.2rem;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+  }
+  .prose :is(h2, h3) + * {
+    margin-top: 0;
+  }
+  .prose a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  .prose a:hover {
+    color: var(--color-primary-dark);
+  }
+  .prose strong {
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+  .prose :is(ul, ol) {
+    padding-left: 1.4em;
+  }
+  .prose ul {
+    list-style: disc;
+  }
+  .prose ol {
+    list-style: decimal;
+  }
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+  .prose li::marker {
+    color: var(--color-secondary);
+  }
+  .prose blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1em;
+    color: var(--color-muted);
+    font-style: italic;
+  }
+  .prose img {
+    border-radius: var(--radius-card);
+  }
+  .prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-chip);
+  }
+  .prose pre {
+    background: var(--color-primary-dark);
+    color: #fff;
+    padding: 1em 1.25em;
+    border-radius: var(--radius-card);
+    overflow-x: auto;
+  }
+  .prose pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Pagefind UI — tematizada coa identidade de IGIT.
+ * ------------------------------------------------------------------ */
+.pagefind-igit {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--color-primary);
+  --pagefind-ui-text: var(--color-text);
+  --pagefind-ui-background: var(--color-surface);
+  --pagefind-ui-border: var(--color-border);
+  --pagefind-ui-tag: var(--color-bg);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-image-border-radius: 12px;
+  --pagefind-ui-font: var(--font-body);
+}
+
+/* ------------------------------------------------------------------ *
+ * Utilidades de proxecto
+ * ------------------------------------------------------------------ */
+@layer utilities {
+  /* Salto ao contido para lectores de pantalla / teclado */
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: -3rem;
+    z-index: 100;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius-btn);
+    transition: top 150ms ease;
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+  }
+}

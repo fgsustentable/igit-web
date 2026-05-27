@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import CollectionList, { type ListItem } from '@/components/content/CollectionList.astro';
+import { t } from '@/i18n/utils';
+
+const lang = 'gl' as const;
+
+const items: ListItem[] = (await getCollection('novas'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map((entry) => ({
+    href: `/novas/${entry.id}`,
+    title: entry.data.title,
+    summary: entry.data.summary,
+    lang: entry.data.lang,
+    date: entry.data.date,
+    cover: entry.data.cover ?? null,
+    tags: entry.data.tags,
+  }));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'listing.newsTitle')}
+  description={t(lang, 'listing.newsIntro')}
+>
+  <PageHeader title={t(lang, 'listing.newsTitle')} intro={t(lang, 'listing.newsIntro')} />
+  <CollectionList items={items} uiLang={lang} />
+</BaseLayout>

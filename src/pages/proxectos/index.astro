@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import CollectionList, { type ListItem } from '@/components/content/CollectionList.astro';
+import { t } from '@/i18n/utils';
+
+const lang = 'gl' as const;
+
+const time = (d?: Date) => (d ? d.getTime() : 0);
+
+const items: ListItem[] = (await getCollection('proxectos'))
+  .sort(
+    (a, b) =>
+      Number(b.data.featured) - Number(a.data.featured) || time(b.data.date) - time(a.data.date),
+  )
+  .map((entry) => ({
+    href: `/proxectos/${entry.id}`,
+    title: entry.data.title,
+    summary: entry.data.summary,
+    lang: entry.data.lang,
+    date: entry.data.date ?? null,
+    cover: entry.data.cover ?? null,
+    status: entry.data.status,
+    tags: [],
+  }));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'listing.projectsTitle')}
+  description={t(lang, 'listing.projectsIntro')}
+>
+  <PageHeader title={t(lang, 'listing.projectsTitle')} intro={t(lang, 'listing.projectsIntro')} />
+  <CollectionList items={items} uiLang={lang} />
+</BaseLayout>

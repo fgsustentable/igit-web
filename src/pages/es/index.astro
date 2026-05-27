@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Fins from '@/components/sections/Fins.astro';
+import Destacados from '@/components/sections/Destacados.astro';
+import CTAContacto from '@/components/sections/CTAContacto.astro';
+import { t } from '@/i18n/utils';
+
+const lang = 'es' as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'site.fullName')}
+  description={t(lang, 'site.description')}
+>
+  <Hero lang={lang} />
+  <Fins lang={lang} />
+  <Destacados lang={lang} />
+  <CTAContacto lang={lang} />
+</BaseLayout>

@@ -1,0 +1,34 @@
+# build output
+dist/
+.vercel/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# pagefind index (xerado no build)
+public/pagefind/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+
+# environment variables — NUNCA commitear segredos
+.env
+.env.production
+.env.local
+.env.*.local
+
+# macOS / editor
+.DS_Store
+*.swp
+
+# Claude Code — axustes locais da máquina
+.claude/settings.local.json
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import Fins from '@/components/sections/Fins.astro';
+import Actividades from '@/components/sections/Actividades.astro';
+import CTAContacto from '@/components/sections/CTAContacto.astro';
+import { t } from '@/i18n/utils';
+import site from '@/data/site.json';
+
+const lang = 'es' as const;
+---
+
+<BaseLayout lang={lang} title={t(lang, 'about.title')} description={t(lang, 'about.intro')}>
+  <PageHeader
+    eyebrow={site.claim[lang]}
+    title={t(lang, 'about.title')}
+    intro={t(lang, 'about.intro')}
+  />
+  <Fins lang={lang} />
+  <Actividades lang={lang} />
+  <CTAContacto lang={lang} />
+</BaseLayout>

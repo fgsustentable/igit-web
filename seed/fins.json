@@ -1,0 +1,73 @@
+{
+  "_comment": "Semente para src/data/fins.json (singleton editable en Keystatic). Fins do Art. 6.1 dos estatutos de IGIT. icon = nome de icona lucide.",
+  "fins": [
+    {
+      "icon": "map",
+      "title": { "gl": "Coñecemento do territorio", "es": "Conocimiento del territorio" },
+      "description": {
+        "gl": "Promover o coñecemento, análise e estudo do territorio mediante cartografía, SIG, análise de datos, teledetección e intelixencia artificial.",
+        "es": "Promover el conocimiento, análisis y estudio del territorio mediante cartografía, SIG, análisis de datos, teledetección e inteligencia artificial."
+      }
+    },
+    {
+      "icon": "layers",
+      "title": { "gl": "Planificación territorial", "es": "Planificación territorial" },
+      "description": {
+        "gl": "Desenvolver proxectos e estudos relacionados coa planificación territorial, a paisaxe, a sustentabilidade ambiental, o desenvolvemento rural e a xestión do territorio.",
+        "es": "Desarrollar proyectos y estudios relacionados con la planificación territorial, el paisaje, la sostenibilidad ambiental, el desarrollo rural y la gestión del territorio."
+      }
+    },
+    {
+      "icon": "cpu",
+      "title": { "gl": "Tecnoloxía e IA aplicada", "es": "Tecnología e IA aplicada" },
+      "description": {
+        "gl": "Impulsar o uso de tecnoloxías dixitais, análise de datos e intelixencia artificial aplicadas ao coñecemento, planificación e xestión do territorio.",
+        "es": "Impulsar el uso de tecnologías digitales, análisis de datos e inteligencia artificial aplicadas al conocimiento, planificación y gestión del territorio."
+      }
+    },
+    {
+      "icon": "activity",
+      "title": { "gl": "Observatorios de datos", "es": "Observatorios de datos" },
+      "description": {
+        "gl": "Desenvolver observatorios territoriais e sistemas de monitorización baseados en datos.",
+        "es": "Desarrollar observatorios territoriales y sistemas de monitorización basados en datos."
+      }
+    },
+    {
+      "icon": "graduation-cap",
+      "title": { "gl": "Educación territorial", "es": "Educación territorial" },
+      "description": {
+        "gl": "Fomentar a educación territorial e a alfabetización cartográfica.",
+        "es": "Fomentar la educación territorial y la alfabetización cartográfica."
+      }
+    },
+    {
+      "icon": "shield-check",
+      "title": { "gl": "IA responsable e ética", "es": "IA responsable y ética" },
+      "description": {
+        "gl": "Promover o uso responsable e ético da intelixencia artificial.",
+        "es": "Promover el uso responsable y ético de la inteligencia artificial."
+      }
+    },
+    {
+      "icon": "leaf",
+      "title": { "gl": "Desenvolvemento sostible", "es": "Desarrollo sostenible" },
+      "description": {
+        "gl": "Apoiar o desenvolvemento territorial sostible.",
+        "es": "Apoyar el desarrollo territorial sostenible."
+      }
+    },
+    {
+      "icon": "handshake",
+      "title": { "gl": "Colaboración", "es": "Colaboración" },
+      "description": {
+        "gl": "Fomentar a colaboración entre administracións, universidades e entidades.",
+        "es": "Fomentar la colaboración entre administraciones, universidades y entidades."
+      }
+    }
+  ],
+  "actividades": {
+    "gl": ["Estudos e informes territoriais", "Cartografía e SIG", "Análise territorial e ambiental", "Ferramentas baseadas en IA", "Observatorios territoriais", "Cursos e formación", "Programas educativos", "Publicación de estudos", "Colaboración con entidades públicas e privadas"],
+    "es": ["Estudios e informes territoriales", "Cartografía y SIG", "Análisis territorial y ambiental", "Herramientas basadas en IA", "Observatorios territoriales", "Cursos y formación", "Programas educativos", "Publicación de estudios", "Colaboración con entidades públicas y privadas"]
+  }
+}

@@ -1,0 +1,28 @@
+---
+import { t, localizedHref, type Lang } from '@/i18n/utils';
+import TopoTexture from '@/components/content/TopoTexture.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
+  <div class="relative overflow-hidden rounded-card bg-primary px-6 py-12 text-center sm:px-12 sm:py-16">
+    <TopoTexture
+      class="pointer-events-none absolute inset-0 h-full w-full text-white"
+      opacity={0.12}
+    />
+    <div class="relative mx-auto max-w-2xl">
+      <h2 class="text-2xl font-bold text-white sm:text-3xl">{t(lang, 'cta.title')}</h2>
+      <p class="mt-3 text-white/85">{t(lang, 'cta.text')}</p>
+      <a
+        href={localizedHref('contact', lang)}
+        class="mt-8 inline-flex items-center justify-center rounded-btn bg-accent px-6 py-3 font-semibold text-primary-dark transition-[filter] hover:brightness-95"
+      >
+        {t(lang, 'cta.button')}
+      </a>
+    </div>
+  </div>
+</section>

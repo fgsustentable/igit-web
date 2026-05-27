@@ -1,0 +1,38 @@
+---
+import fins from '@/data/fins.json';
+import { t, type Lang } from '@/i18n/utils';
+import Icon from '@/components/content/Icon.astro';
+
+/**
+ * Lista de actividades de IGIT (Art. 6.2 dos estatutos).
+ * Sen equipo nin nomes: describe o QUE fai IGIT, non quen.
+ */
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const actividades = fins.actividades[lang];
+---
+
+<section class="border-t border-border bg-surface">
+  <div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 sm:py-20">
+    <div class="max-w-2xl">
+      <h2 class="text-2xl font-bold sm:text-3xl">{t(lang, 'about.activitiesTitle')}</h2>
+      <p class="mt-3 text-muted">{t(lang, 'about.activitiesIntro')}</p>
+    </div>
+
+    <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        actividades.map((actividade) => (
+          <li class="flex items-start gap-3 rounded-card border border-border bg-bg p-4 transition-shadow duration-200 hover:shadow-md">
+            <span class="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+              <Icon name="check" size={16} />
+            </span>
+            <span class="text-sm font-medium leading-relaxed text-text">{actividade}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,128 @@
+{
+  "site": {
+    "name": "IGIT",
+    "fullName": "Instituto Galego de Intelixencia Territorial",
+    "description": "Asociación galega sen ánimo de lucro que aplica cartografía, SIG, teledetección, análise de datos e intelixencia artificial ao coñecemento, planificación e xestión do territorio."
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Que facemos",
+    "news": "Novas",
+    "publications": "Publicacións",
+    "projects": "Proxectos",
+    "contact": "Contacto",
+    "search": "Buscar"
+  },
+  "a11y": {
+    "skipToContent": "Saltar ao contido",
+    "openMenu": "Abrir o menú",
+    "closeMenu": "Pechar o menú",
+    "mainNav": "Navegación principal",
+    "switchToEs": "Cambiar a castelán",
+    "switchToGl": "Cambiar a galego",
+    "homeLink": "IGIT — ir ao inicio"
+  },
+  "hero": {
+    "ctaPrimary": "Que facemos",
+    "ctaSecondary": "Contacto"
+  },
+  "fins": {
+    "title": "Os nosos fins",
+    "subtitle": "Liñas de traballo que guían a actividade de IGIT (Art. 6 dos estatutos)."
+  },
+  "destacados": {
+    "news": "Últimas novas",
+    "publications": "Publicacións recentes",
+    "projects": "Observatorios e proxectos",
+    "viewAllNews": "Ver todas as novas",
+    "viewAllPublications": "Ver todas as publicacións",
+    "viewAllProjects": "Ver todos os proxectos",
+    "empty": "Aínda non hai contido publicado."
+  },
+  "cta": {
+    "title": "Colaboramos co teu territorio",
+    "text": "Administracións, universidades e entidades: contacta con IGIT para estudos, observatorios e ferramentas baseadas en datos.",
+    "button": "Fala connosco"
+  },
+  "listing": {
+    "newsTitle": "Novas",
+    "newsIntro": "Actualidade e comunicados de IGIT.",
+    "publicationsTitle": "Publicacións e informes",
+    "publicationsIntro": "Estudos, informes técnicos e documentos territoriais.",
+    "projectsTitle": "Observatorios e proxectos",
+    "projectsIntro": "Observatorios de datos e proxectos territoriais de IGIT."
+  },
+  "content": {
+    "readMore": "Ler máis",
+    "publishedOn": "Publicado o",
+    "authors": "Autoría",
+    "tags": "Etiquetas",
+    "downloadPdf": "Descargar PDF",
+    "visit": "Visitar",
+    "backToNews": "Volver ás novas",
+    "backToPublications": "Volver ás publicacións",
+    "backToProjects": "Volver aos proxectos",
+    "filterByLang": "Filtrar por idioma",
+    "filterAll": "Todos",
+    "empty": "Aínda non hai contido nesta sección.",
+    "noResults": "Non hai resultados para o filtro seleccionado.",
+    "statusEnCurso": "En curso",
+    "statusFinalizado": "Finalizado"
+  },
+  "langBadge": {
+    "gl": "GL",
+    "es": "ES",
+    "glLabel": "Contido en galego",
+    "esLabel": "Contido en castelán"
+  },
+  "about": {
+    "title": "Que facemos",
+    "intro": "IGIT aplica a intelixencia territorial ao servizo de Galicia: convertemos datos e tecnoloxía en coñecemento útil para planificar e xestionar o territorio.",
+    "finsTitle": "Os nosos fins",
+    "activitiesTitle": "As nosas actividades",
+    "activitiesIntro": "Liñas de actividade a través das que IGIT cumpre os seus fins."
+  },
+  "form": {
+    "title": "Contacto",
+    "intro": "Escríbenos e responderémosche o antes posible.",
+    "name": "Nome",
+    "namePlaceholder": "O teu nome",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "ti@exemplo.com",
+    "message": "Mensaxe",
+    "messagePlaceholder": "Conta-nos en que podemos axudar",
+    "send": "Enviar mensaxe",
+    "sending": "Enviando…",
+    "requiredName": "Indica o teu nome.",
+    "requiredEmail": "Indica o teu correo.",
+    "invalidEmail": "O correo non parece válido.",
+    "requiredMessage": "Escribe unha mensaxe.",
+    "errorGeneric": "Non se puido enviar a mensaxe. Téntao de novo.",
+    "directLabel": "Tamén podes escribir directamente a",
+    "privacyNote": "Usaremos os teus datos só para responder a esta mensaxe."
+  },
+  "grazas": {
+    "title": "Grazas pola túa mensaxe",
+    "text": "Recibimos o teu correo e responderémosche o antes posible.",
+    "back": "Volver ao inicio"
+  },
+  "search": {
+    "title": "Buscar",
+    "intro": "Busca en novas, publicacións e proxectos.",
+    "placeholder": "Que estás a buscar?",
+    "zeroResults": "Sen resultados para [SEARCH_TERM]",
+    "clear": "Limpar"
+  },
+  "notFound": {
+    "title": "Páxina non atopada",
+    "text": "A páxina que buscas non existe ou cambiou de enderezo.",
+    "back": "Volver ao inicio"
+  },
+  "footer": {
+    "tagline": "Intelixencia territorial para Galicia.",
+    "navTitle": "Navegación",
+    "contactTitle": "Contacto",
+    "rights": "Todos os dereitos reservados.",
+    "builtWith": "Sitio estático, accesible e de código aberto."
+  }
+}

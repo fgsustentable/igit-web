@@ -1,0 +1,33 @@
+---
+import fins from '@/data/fins.json';
+import { t, type Lang } from '@/i18n/utils';
+import Icon from '@/components/content/Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 sm:py-20">
+  <div class="max-w-2xl">
+    <h2 class="text-2xl font-bold sm:text-3xl">{t(lang, 'fins.title')}</h2>
+    <p class="mt-3 text-muted">{t(lang, 'fins.subtitle')}</p>
+  </div>
+
+  <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      fins.fins.map((fin) => (
+        <li class="rounded-card border border-border bg-surface p-5 transition-shadow duration-200 hover:shadow-md">
+          <span class="inline-flex h-11 w-11 items-center justify-center rounded-btn bg-primary/10 text-primary">
+            <Icon name={fin.icon} size={22} />
+          </span>
+          <h3 class="mt-4 font-display text-base font-semibold text-primary-dark">
+            {fin.title[lang]}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{fin.description[lang]}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,92 @@
+---
+import { t, formatDate, type Lang } from '@/i18n/utils';
+import LangBadge from '@/components/content/LangBadge.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  summary: string;
+  /** Idioma do contido (para a etiqueta GL/ES). */
+  lang: Lang;
+  /** Idioma da interface (datas, estados, textos). */
+  uiLang: Lang;
+  date?: Date | null;
+  cover?: string | null;
+  status?: 'en-curso' | 'finalizado' | null;
+  tags?: string[];
+}
+const {
+  href,
+  title,
+  summary,
+  lang,
+  uiLang,
+  date = null,
+  cover = null,
+  status = null,
+  tags = [],
+} = Astro.props;
+---
+
+<article class="group relative flex flex-col overflow-hidden rounded-card border border-border bg-surface transition-shadow duration-200 hover:shadow-md">
+  {
+    cover && (
+      <div class="aspect-[16/9] overflow-hidden bg-primary/5">
+        <img
+          src={cover}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+        />
+      </div>
+    )
+  }
+
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div class="flex flex-wrap items-center gap-2 text-xs text-muted">
+      <LangBadge lang={lang} uiLang={uiLang} />
+      {
+        status && (
+          <span
+            class:list={[
+              'inline-flex items-center rounded-chip px-1.5 py-0.5 font-medium leading-none',
+              status === 'en-curso'
+                ? 'bg-secondary/10 text-secondary'
+                : 'bg-muted/15 text-muted',
+            ]}
+          >
+            {t(uiLang, status === 'en-curso' ? 'content.statusEnCurso' : 'content.statusFinalizado')}
+          </span>
+        )
+      }
+      {
+        date && (
+          <time datetime={date.toISOString()} class="ml-auto tabular-nums">
+            {formatDate(date, uiLang)}
+          </time>
+        )
+      }
+    </div>
+
+    <h3 class="font-display text-lg font-semibold leading-snug text-primary-dark">
+      <a href={href} class="transition-colors after:absolute after:inset-0 hover:text-primary">
+        {title}
+      </a>
+    </h3>
+
+    <p class="line-clamp-3 text-sm leading-relaxed text-muted">{summary}</p>
+
+    {
+      tags.length > 0 && (
+        <ul class="mt-auto flex flex-wrap gap-1.5 pt-1">
+          {tags.slice(0, 3).map((tag) => (
+            <li class="rounded-chip bg-bg px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-border">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

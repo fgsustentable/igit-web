@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import { t, localizedHref, type Lang } from '@/i18n/utils';
+import ContentCard from '@/components/content/ContentCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const time = (d?: Date) => (d ? d.getTime() : 0);
+const byDateDesc = (a: { data: { date?: Date } }, b: { data: { date?: Date } }) =>
+  time(b.data.date) - time(a.data.date);
+
+const novas = (await getCollection('novas')).sort(byDateDesc).slice(0, 3);
+const publicacions = (await getCollection('publicacions')).sort(byDateDesc).slice(0, 3);
+const proxectos = (await getCollection('proxectos'))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || byDateDesc(a, b))
+  .slice(0, 3);
+
+const blocks = [
+  { items: novas, base: 'novas', titleKey: 'destacados.news', allKey: 'destacados.viewAllNews', route: 'news' as const },
+  { items: publicacions, base: 'publicacions', titleKey: 'destacados.publications', allKey: 'destacados.viewAllPublications', route: 'publications' as const },
+  { items: proxectos, base: 'proxectos', titleKey: 'destacados.projects', allKey: 'destacados.viewAllProjects', route: 'projects' as const },
+];
+---
+
+<div class="border-t border-border bg-surface/40">
+  <div class="mx-auto max-w-[1200px] space-y-16 px-4 py-16 sm:px-6 sm:py-20">
+    {
+      blocks.map((block) => (
+        <section>
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <h2 class="text-2xl font-bold sm:text-3xl">{t(lang, block.titleKey)}</h2>
+            <a
+              href={localizedHref(block.route, lang)}
+              class="inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary-dark"
+            >
+              {t(lang, block.allKey)}
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          {block.items.length === 0 ? (
+            <p class="mt-6 rounded-card border border-dashed border-border bg-surface px-5 py-8 text-center text-sm text-muted">
+              {t(lang, 'destacados.empty')}
+            </p>
+          ) : (
+            <ul class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {block.items.map((entry) => (
+                <li class="flex">
+                  <ContentCard
+                    href={`/${block.base}/${entry.id}`}
+                    title={entry.data.title}
+                    summary={entry.data.summary}
+                    lang={entry.data.lang}
+                    uiLang={lang}
+                    date={entry.data.date ?? null}
+                    cover={'cover' in entry.data ? (entry.data.cover ?? null) : null}
+                    status={'status' in entry.data ? entry.data.status : null}
+                    tags={'tags' in entry.data ? entry.data.tags : []}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</div>

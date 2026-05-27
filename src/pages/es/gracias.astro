@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/content/Icon.astro';
+import { t, localizedHref } from '@/i18n/utils';
+
+const lang = 'es' as const;
+---
+
+<BaseLayout lang={lang} title={t(lang, 'grazas.title')} noindex={true}>
+  <section class="mx-auto flex max-w-[640px] flex-col items-center px-4 py-20 text-center sm:py-28">
+    <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+      <Icon name="check" size={28} />
+    </span>
+    <h1 class="mt-6 text-3xl font-bold text-primary-dark">{t(lang, 'grazas.title')}</h1>
+    <p class="mt-4 text-lg leading-relaxed text-muted">{t(lang, 'grazas.text')}</p>
+    <a
+      href={localizedHref('home', lang)}
+      class="mt-8 inline-flex items-center justify-center rounded-btn bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary-dark"
+    >
+      {t(lang, 'grazas.back')}
+    </a>
+  </section>
+</BaseLayout>

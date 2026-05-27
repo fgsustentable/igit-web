@@ -1,0 +1,14 @@
+---
+/**
+ * Envoltorio tipográfico para o corpo dos artigos renderizado dende Markdoc.
+ * Os estilos viven en `.prose` (global.css).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['prose', className]}>
+  <slot />
+</div>

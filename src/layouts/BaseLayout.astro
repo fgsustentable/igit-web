@@ -1,0 +1,109 @@
+---
+import '@/styles/global.css';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { t, localizePath, hasLangPair, type Lang } from '@/i18n/utils';
+import site from '@/data/site.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+  /** Ruta da imaxe OG (relativa á raíz do sitio). */
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = t(Astro.props.lang, 'site.description'),
+  lang,
+  ogImage = '/og/default.png',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://igit.gal');
+const canonical = new URL(Astro.url.pathname, siteUrl);
+const ogImageUrl = new URL(ogImage, siteUrl);
+const siteName = t(lang, 'site.name');
+const fullTitle = title === siteName || title.includes('IGIT') ? title : `${title} · IGIT`;
+
+const ogLocale = lang === 'gl' ? 'gl_ES' : 'es_ES';
+const ogLocaleAlt = lang === 'gl' ? 'es_ES' : 'gl_ES';
+
+const showAlternates = hasLangPair(Astro.url.pathname);
+const glHref = new URL(localizePath(Astro.url.pathname, 'gl'), siteUrl).href;
+const esHref = new URL(localizePath(Astro.url.pathname, 'es'), siteUrl).href;
+
+const sameAs = Object.values(site.social).filter((u) => typeof u === 'string' && u.length > 0);
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: t('gl', 'site.fullName'),
+  alternateName: 'IGIT',
+  url: siteUrl.href,
+  logo: new URL('/favicon.svg', siteUrl).href,
+  email: site.contactEmail,
+  description: t(lang, 'site.description'),
+  areaServed: { '@type': 'AdministrativeArea', name: 'Galicia' },
+  ...(sameAs.length ? { sameAs } : {}),
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical.href} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="alternate" type="application/rss+xml" title="IGIT — Novas" href={new URL('/rss.xml', siteUrl).href} />
+
+    {
+      showAlternates && (
+        <>
+          <link rel="alternate" hreflang="gl" href={glHref} />
+          <link rel="alternate" hreflang="es" href={esHref} />
+          <link rel="alternate" hreflang="x-default" href={glHref} />
+        </>
+      )
+    }
+
+    {/* Open Graph */}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="IGIT" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImageUrl.href} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl.href} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="skip-link">{t(lang, 'a11y.skipToContent')}</a>
+    <Header lang={lang} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

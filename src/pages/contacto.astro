@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import Icon from '@/components/content/Icon.astro';
+import ContactForm from '@/components/forms/ContactForm.tsx';
+import { t, localizedHref } from '@/i18n/utils';
+import site from '@/data/site.json';
+
+const lang = 'gl' as const;
+
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const email = site.contactEmail;
+
+const strings = {
+  name: t(lang, 'form.name'),
+  namePlaceholder: t(lang, 'form.namePlaceholder'),
+  email: t(lang, 'form.email'),
+  emailPlaceholder: t(lang, 'form.emailPlaceholder'),
+  message: t(lang, 'form.message'),
+  messagePlaceholder: t(lang, 'form.messagePlaceholder'),
+  send: t(lang, 'form.send'),
+  sending: t(lang, 'form.sending'),
+  requiredName: t(lang, 'form.requiredName'),
+  requiredEmail: t(lang, 'form.requiredEmail'),
+  invalidEmail: t(lang, 'form.invalidEmail'),
+  requiredMessage: t(lang, 'form.requiredMessage'),
+  errorGeneric: t(lang, 'form.errorGeneric'),
+};
+---
+
+<BaseLayout lang={lang} title={t(lang, 'form.title')} description={t(lang, 'form.intro')}>
+  <PageHeader title={t(lang, 'form.title')} intro={t(lang, 'form.intro')} />
+
+  <section class="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-16">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+      <aside class="space-y-6">
+        <div class="rounded-card border border-border bg-surface p-6">
+          <span class="inline-flex h-11 w-11 items-center justify-center rounded-btn bg-primary/10 text-primary">
+            <Icon name="mail" size={22} />
+          </span>
+          <p class="mt-4 text-sm text-muted">{t(lang, 'form.directLabel')}</p>
+          <a
+            href={`mailto:${email}`}
+            class="mt-1 inline-block font-display text-lg font-semibold text-primary-dark underline-offset-2 hover:text-primary hover:underline"
+          >
+            {email}
+          </a>
+        </div>
+        <p class="text-sm leading-relaxed text-muted">{t(lang, 'form.privacyNote')}</p>
+      </aside>
+
+      <div class="rounded-card border border-border bg-surface p-6 sm:p-8">
+        <ContactForm
+          client:load
+          accessKey={accessKey}
+          redirectTo={localizedHref('thanks', lang)}
+          subject="Nova mensaxe do formulario web de IGIT"
+          strings={strings}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

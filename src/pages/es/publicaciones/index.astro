@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import CollectionList, { type ListItem } from '@/components/content/CollectionList.astro';
+import { t } from '@/i18n/utils';
+
+const lang = 'es' as const;
+
+const items: ListItem[] = (await getCollection('publicacions'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map((entry) => ({
+    href: `/publicacions/${entry.id}`,
+    title: entry.data.title,
+    summary: entry.data.summary,
+    lang: entry.data.lang,
+    date: entry.data.date,
+    cover: entry.data.cover ?? null,
+    tags: entry.data.tags,
+  }));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'listing.publicationsTitle')}
+  description={t(lang, 'listing.publicationsIntro')}
+>
+  <PageHeader
+    title={t(lang, 'listing.publicationsTitle')}
+    intro={t(lang, 'listing.publicationsIntro')}
+  />
+  <CollectionList items={items} uiLang={lang} />
+</BaseLayout>

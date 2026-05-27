@@ -1,0 +1,121 @@
+---
+import { t, type Lang } from '@/i18n/utils';
+import ContentCard from '@/components/content/ContentCard.astro';
+
+/** Forma mínima que precisa unha tarxeta de listaxe. */
+export interface ListItem {
+  href: string;
+  title: string;
+  summary: string;
+  /** Idioma do contido (para o filtro e a etiqueta GL/ES). */
+  lang: Lang;
+  date?: Date | null;
+  cover?: string | null;
+  status?: 'en-curso' | 'finalizado' | null;
+  tags?: string[];
+}
+
+interface Props {
+  items: ListItem[];
+  /** Idioma da interface. */
+  uiLang: Lang;
+}
+const { items, uiLang } = Astro.props;
+
+const hasGl = items.some((i) => i.lang === 'gl');
+const hasEs = items.some((i) => i.lang === 'es');
+// O filtro só ten sentido cando hai contido nos dous idiomas.
+const showFilter = hasGl && hasEs;
+
+const filters = [
+  { value: 'all', label: t(uiLang, 'content.filterAll') },
+  { value: 'gl', label: t(uiLang, 'langBadge.gl') },
+  { value: 'es', label: t(uiLang, 'langBadge.es') },
+];
+---
+
+<section class="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-16">
+  {
+    items.length === 0 ? (
+      <p class="rounded-card border border-dashed border-border bg-surface px-5 py-12 text-center text-sm text-muted">
+        {t(uiLang, 'content.empty')}
+      </p>
+    ) : (
+      <div data-collection>
+        {showFilter && (
+          <div class="mb-8 flex flex-wrap items-center gap-2">
+            <span class="mr-1 text-sm font-medium text-muted">
+              {t(uiLang, 'content.filterByLang')}:
+            </span>
+            <div
+              role="group"
+              aria-label={t(uiLang, 'content.filterByLang')}
+              class="inline-flex gap-1 rounded-btn border border-border bg-surface p-1"
+            >
+              {filters.map((f, idx) => (
+                <button
+                  type="button"
+                  data-filter={f.value}
+                  aria-pressed={idx === 0 ? 'true' : 'false'}
+                  class="rounded-[6px] px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:text-primary aria-pressed:bg-primary aria-pressed:text-white aria-pressed:hover:text-white"
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => (
+            <li class="flex" data-lang={item.lang}>
+              <ContentCard
+                href={item.href}
+                title={item.title}
+                summary={item.summary}
+                lang={item.lang}
+                uiLang={uiLang}
+                date={item.date ?? null}
+                cover={item.cover ?? null}
+                status={item.status ?? null}
+                tags={item.tags ?? []}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <p
+          data-no-results
+          hidden
+          class="mt-8 rounded-card border border-dashed border-border bg-surface px-5 py-8 text-center text-sm text-muted"
+        >
+          {t(uiLang, 'content.noResults')}
+        </p>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  // Filtro por idioma do contido — mellora progresiva, sen illa React.
+  for (const root of document.querySelectorAll<HTMLElement>('[data-collection]')) {
+    const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    const items = Array.from(root.querySelectorAll<HTMLElement>('[data-lang]'));
+    const noResults = root.querySelector<HTMLElement>('[data-no-results]');
+    if (buttons.length === 0) continue;
+
+    for (const btn of buttons) {
+      btn.addEventListener('click', () => {
+        const value = btn.dataset.filter;
+        for (const b of buttons) b.setAttribute('aria-pressed', String(b === btn));
+        let visible = 0;
+        for (const li of items) {
+          const show = value === 'all' || li.dataset.lang === value;
+          li.hidden = !show;
+          if (show) visible += 1;
+        }
+        if (noResults) noResults.hidden = visible !== 0;
+      });
+    }
+  }
+</script>

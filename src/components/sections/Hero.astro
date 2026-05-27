@@ -1,0 +1,46 @@
+---
+import site from '@/data/site.json';
+import { t, localizedHref, type Lang } from '@/i18n/utils';
+import TopoTexture from '@/components/content/TopoTexture.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const claim = site.claim[lang];
+const title = site.heroTitle[lang];
+const subtitle = site.heroSubtitle[lang];
+---
+
+<section class="relative overflow-hidden border-b border-border bg-bg">
+  <TopoTexture
+    class="pointer-events-none absolute inset-0 h-full w-full text-primary"
+    opacity={0.1}
+  />
+  <div class="relative mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">
+      {claim}
+    </p>
+    <h1 class="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.75rem)] font-bold leading-[1.08] text-primary-dark">
+      {title}
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      {subtitle}
+    </p>
+    <div class="mt-9 flex flex-wrap gap-3">
+      <a
+        href={localizedHref('about', lang)}
+        class="inline-flex items-center justify-center rounded-btn bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary-dark"
+      >
+        {t(lang, 'hero.ctaPrimary')}
+      </a>
+      <a
+        href={localizedHref('contact', lang)}
+        class="inline-flex items-center justify-center rounded-btn border border-border bg-surface px-6 py-3 font-medium text-primary transition-colors hover:bg-primary/5"
+      >
+        {t(lang, 'hero.ctaSecondary')}
+      </a>
+    </div>
+  </div>
+</section>
