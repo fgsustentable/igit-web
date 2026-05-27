@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Sitio web institucional do Instituto Galego de Intelixencia Territorial (IGIT)",
   "type": "module",
+  "packageManager": "pnpm@11.3.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site .vercel/output/static",
